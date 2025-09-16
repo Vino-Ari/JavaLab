@@ -47,9 +47,9 @@ public class Reader {
 
     @Override
     public String toString() {
-        return "Имя: "+name+
-                "\nКнгига: "+book.getName()+
-                "\nАвтор: "+book.getAuthor()+
-                "\nCдать до: "+date.toString();
+        return "Имя: " + name +
+                "\nКнгига: " + book.getName() +
+                "\nАвтор: " + book.getAuthor() +
+                "\nCдать до: " + date.toString();
     }
 }
