@@ -1,5 +1,6 @@
 package Lab5.packageLab5;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,7 +61,32 @@ public class Uchenik {
         if (score < 2 || score > 5) throw new IllegalArgumentException("Оценка должна быть в диапозоне от 2 до 5");
         this.assessments.put(subjectName, score);
     }
-
+    public static void printSpecialScholarshipRecipients(ArrayList<Shkolnik> shkolniks, ArrayList<Student> students) {
+        ArrayList<Uchenik> result = new ArrayList<>();
+        for (Student student : students) {
+            int sum = 0;
+            for (Map.Entry<String, Integer> entry : student.getAssessments().entrySet()) {
+                sum += entry.getValue();
+            }
+            if ((double) sum / 4 < 4.75) continue;
+            sum = 0;
+            for (Map.Entry<String, Integer> entry : student.getTermPapers().entrySet()) {
+                sum += entry.getValue();
+            }
+            if ((double) sum / 3 != 5.00) continue;
+            result.add(student);
+        }
+        for (Shkolnik shkolnik : shkolniks) {
+            if (!(shkolnik.getAssessments().get("Математика") == 5 && shkolnik.getAssessments().get("Русский язык") == 5 &&
+                    shkolnik.getAssessments().get("История") == 5 && shkolnik.getAssessments().get("Английский язык") == 5 &&
+                    shkolnik.getAssessments().get("Биология") >= 4 && shkolnik.getAssessments().get("Физика") >= 4))
+                continue;
+            if (!(shkolnik.isParticipatedInRegionalOlympiad()
+                    || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())) continue;
+            result.add(shkolnik);
+        }
+        System.out.println(result.toString());
+    }
     @Override
     public String toString() {
         return "Имя: " + this.name +

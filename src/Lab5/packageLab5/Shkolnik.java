@@ -79,6 +79,11 @@ public class Shkolnik extends Uchenik {
     public boolean isPrizeWinnerInCityOlympiad() {
         return prizeWinnerInCityOlympiad;
     }
+    public static void printGirlsWithFirstPlace(ArrayList<Shkolnik> shkolniks) {
+        shkolniks.removeIf(shkolnik -> (shkolnik.getGender().equals("m") || !(shkolnik.isParticipatedInRegionalOlympiad()
+                || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())));
+        System.out.println(shkolniks.toString());
+    }
 
     @Override
     public String toString() {

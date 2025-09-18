@@ -68,7 +68,20 @@ public class Student extends Uchenik {
             setAssessments(assessment.getKey(), assessment.getValue());
         }
     }
+    public static void printStudentsWithCourseworkGrades(ArrayList<Student> students) {
+        for (Student student : students) {
+            HashMap<String, Integer> termPapers = student.getTermPapers();
+            boolean good = true;
+            for (Map.Entry<String, Integer> entry : termPapers.entrySet()) {
+                if (entry.getValue() == 2) {
+                    good = false;
+                    break;
+                }
+            }
+            if (good) System.out.println(student.toString());
 
+        }
+    }
     @Override
     public String toString() {
         return super.toString() + "\n" + this.termPapers.toString() + "\n";

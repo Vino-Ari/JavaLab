@@ -10,10 +10,7 @@ public class Lab4_ {
         Reader readerTwo = new Reader("Вася", bookOne, LocalDate.of(2026, 3, 25));
         System.out.println(Reader.deadline(readerOne, LocalDate.of(2026, 3, 29)));
         System.out.println(Reader.deadline(readerTwo, LocalDate.of(2026, 3, 29)));
-        System.out.println(readerOne.toString());
-        System.out.println(readerTwo.toString());
-        System.out.println(bookOne.toString());
-        System.out.println(bookTwo.toString());
+
 
     }
 }

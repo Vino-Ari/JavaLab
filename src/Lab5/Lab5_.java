@@ -18,65 +18,19 @@ public class Lab5_ {
         for (int i = 0; i < 2; i++) {
             shkolniks.add(creatShkolnikLab(i));
         }
-        while (true) {//ручной ввод
-            System.out.println("Введите кого хотите создать?\nШкольник\nСтудент");
-            String result = scanner.next();
-            if (result.equalsIgnoreCase("Школьник")) shkolniks.add(creatShkolnik(scanner));
-            if (result.equalsIgnoreCase("Студент")) students.add(creatStudent(scanner));
-            if (result.equalsIgnoreCase("выход")) break;
-        }
-//        printGirlsWithFirstPlace(shkolniks);//рандом ввод
-//        printStudentsWithCourseworkGrades(students);
-        printSpecialScholarshipRecipients(shkolniks, students);
+//        while (true) {//ручной ввод
+//            System.out.println("Введите кого хотите создать?\nШкольник\nСтудент");
+//            String result = scanner.next();
+//            if (result.equalsIgnoreCase("Школьник")) shkolniks.add(creatShkolnik(scanner));
+//            if (result.equalsIgnoreCase("Студент")) students.add(creatStudent(scanner));
+//            if (result.equalsIgnoreCase("выход")) break;
+//        }
+
+        Shkolnik.printGirlsWithFirstPlace(shkolniks);
+        Student.printStudentsWithCourseworkGrades(students);
+        Uchenik.printSpecialScholarshipRecipients(shkolniks, students);
     }
 
-    public static void printSpecialScholarshipRecipients(ArrayList<Shkolnik> shkolniks, ArrayList<Student> students) {
-        ArrayList<Uchenik> result = new ArrayList<>();
-        for (Student student : students) {
-            int sum = 0;
-            for (Map.Entry<String, Integer> entry : student.getAssessments().entrySet()) {
-                sum += entry.getValue();
-            }
-            if ((double) sum / 4 < 4.75) continue;
-            sum = 0;
-            for (Map.Entry<String, Integer> entry : student.getTermPapers().entrySet()) {
-                sum += entry.getValue();
-            }
-            if ((double) sum / 3 != 5.00) continue;
-            result.add(student);
-        }
-        for (Shkolnik shkolnik : shkolniks) {
-            if (!(shkolnik.getAssessments().get("Математика") == 5 && shkolnik.getAssessments().get("Русский язык") == 5 &&
-                    shkolnik.getAssessments().get("История") == 5 && shkolnik.getAssessments().get("Английский язык") == 5 &&
-                    shkolnik.getAssessments().get("Биология") >= 4 && shkolnik.getAssessments().get("Физика") >= 4))
-                continue;
-            if (!(shkolnik.isParticipatedInRegionalOlympiad()
-                    || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())) continue;
-            result.add(shkolnik);
-        }
-        System.out.println(result.toString());
-    }
-
-    public static void printGirlsWithFirstPlace(ArrayList<Shkolnik> shkolniks) {
-        shkolniks.removeIf(shkolnik -> (shkolnik.getGender().equals("m") || !(shkolnik.isParticipatedInRegionalOlympiad()
-                || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())));
-        System.out.println(shkolniks.toString());
-    }
-
-    public static void printStudentsWithCourseworkGrades(ArrayList<Student> students) {
-        for (Student student : students) {
-            HashMap<String, Integer> termPapers = student.getTermPapers();
-            boolean good = true;
-            for (Map.Entry<String, Integer> entry : termPapers.entrySet()) {
-                if (entry.getValue() == 2) {
-                    good = false;
-                    break;
-                }
-            }
-            if (good) System.out.println(student.toString());
-
-        }
-    }
 
     public static Student creatStudentLab(int count) {
         Random random = new Random();
