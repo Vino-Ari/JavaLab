@@ -1,5 +1,6 @@
 package Lab8;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Lab8_5 {
