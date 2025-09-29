@@ -33,7 +33,7 @@ public class Lab8_6 {
             if (sentence.isEmpty()) {
                 continue;
             }
-            if (sentence.matches(".*(?i)\\b" + Pattern.quote(word) + "\\b.*")) {//выучить
+            if (sentence.matches(".*(?i)\\b" + Pattern.quote(word) + "\\b.*")) {
                 System.out.println(sentence);
                 foundAnySentence = true;
             }
