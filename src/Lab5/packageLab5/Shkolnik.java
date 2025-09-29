@@ -25,8 +25,8 @@ public class Shkolnik extends Uchenik {
         this.prizeWinnerInCityOlympiad = false;
     }
 
-    public Shkolnik(String name, String gender, int age) {
-        super(name, gender, age);
+    public Shkolnik(String name,String surname, String gender, int age) {
+        super(name,surname, gender, age);
         this.getAssessments().put("Математика", 2);
         this.getAssessments().put("Русский язык", 2);
         this.getAssessments().put("История", 2);
@@ -38,10 +38,10 @@ public class Shkolnik extends Uchenik {
         this.prizeWinnerInCityOlympiad = false;
     }
 
-    public Shkolnik(String name, String gender, int age, HashMap<String, Integer> assessments
+    public Shkolnik(String name,String surname, String gender, int age, HashMap<String, Integer> assessments
             , boolean participatedInRegionalOlympiad, boolean firstPlaceAtSchoolOlympiad
             , boolean prizeWinnerInCityOlympiad) {
-        super(name, gender, age);
+        super(name,surname, gender, age);
         this.participatedInRegionalOlympiad = participatedInRegionalOlympiad;
         this.firstPlaceAtSchoolOlympiad = firstPlaceAtSchoolOlympiad;
         this.prizeWinnerInCityOlympiad = prizeWinnerInCityOlympiad;
@@ -87,7 +87,7 @@ public class Shkolnik extends Uchenik {
 
     @Override
     public String toString() {
-        return super.toString() +
+        return "[Школьник] "+super.toString() +
                 "\nУчаствовал в областной олимпиаде: " + participatedInRegionalOlympiad +
                 "\n Имеются первые места в школьной олимпиаде: " + firstPlaceAtSchoolOlympiad +
                 "\n Является призёром городской олимпиады: " + prizeWinnerInCityOlympiad+"\n";
