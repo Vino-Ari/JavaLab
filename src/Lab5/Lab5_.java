@@ -7,32 +7,89 @@ import Lab5.packageLab5.Uchenik;
 import java.util.*;
 
 public class Lab5_ {
-    public static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         ArrayList<Student> students = new ArrayList<>();
         ArrayList<Shkolnik> shkolniks = new ArrayList<>();
+        //оценки студентов
+        HashMap<String, Integer> assessmentsStudentsGOOD = new HashMap<>();
+        HashMap<String, Integer> termPapersStudentsGOOD = new HashMap<>();
+        HashMap<String, Integer> assessmentsStudentsBAD = new HashMap<>();
+        HashMap<String, Integer> termPapersStudentsBAD = new HashMap<>();
+        assessmentsStudentsGOOD.put("Философия", 5);
+        assessmentsStudentsGOOD.put("Математический анализ", 5);
+        assessmentsStudentsGOOD.put("Языки программирования и методы трансляции", 5);
+        assessmentsStudentsGOOD.put("Архитектура компьютеров", 5);
+        termPapersStudentsGOOD.put("Курсовая по \"Архитектура компьютеров\"", 5);
+        termPapersStudentsGOOD.put("Курсовая по \"Дифференциальным уравнениям \"", 5);
+        termPapersStudentsGOOD.put("Курсовая по \"Математическому аналиу\"", 5);
+        assessmentsStudentsBAD.put("Философия", 3);
+        assessmentsStudentsBAD.put("Математический анализ", 3);
+        assessmentsStudentsBAD.put("Языки программирования и методы трансляции", 3);
+        assessmentsStudentsBAD.put("Архитектура компьютеров", 3);
+        termPapersStudentsBAD.put("Курсовая по \"Архитектура компьютеров\"", 3);
+        termPapersStudentsBAD.put("Курсовая по \"Дифференциальным уравнениям \"", 3);
+        termPapersStudentsBAD.put("Курсовая по \"Математическому аналиу\"", 3);
+
+        //студенты для 6 лабы
+        students.add(new Student());
+        students.add(new Student());
+        students.add(new Student());
+        students.add(new Student());
+        students.add(new Student());
+        //оценки школьников
+        HashMap<String, Integer> assessmentsShkolnikGOOD = new HashMap<>();
+        HashMap<String, Integer> assessmentsShkolnikBAD = new HashMap<>();
+        assessmentsShkolnikGOOD.put("Математика", 5);
+        assessmentsShkolnikGOOD.put("Русский язык", 5);
+        assessmentsShkolnikGOOD.put("История", 5);
+        assessmentsShkolnikGOOD.put("Английский язык", 5);
+        assessmentsShkolnikGOOD.put("Биология", 5);
+        assessmentsShkolnikGOOD.put("Физика", 5);
+        assessmentsShkolnikBAD.put("Математика", 3);
+        assessmentsShkolnikBAD.put("Русский язык", 3);
+        assessmentsShkolnikBAD.put("История", 3);
+        assessmentsShkolnikBAD.put("Английский язык", 3);
+        assessmentsShkolnikBAD.put("Биология", 3);
+        assessmentsShkolnikBAD.put("Физика", 3);
+
+        //Школьники для 6 лабы
+        shkolniks.add(new Shkolnik());
+        shkolniks.add(new Shkolnik());
+        shkolniks.add(new Shkolnik());
+//        ArrayList<Uchenik> specialUchenik = new ArrayList<>();
+//        specialUchenik.addAll(Student.SpecialScholarshipRecipients(students));
+//        specialUchenik.addAll(Shkolnik.SpecialScholarshipRecipients(shkolniks));
+//        System.out.println("должны получить специальную стипендию\n" + specialUchenik.toString());
+        shkolniks.sort(Comparator.comparingDouble(Shkolnik::getAcademicPerformance).thenComparing(Shkolnik::getNubmerSchool));//2 задание
+//        System.out.println("Лучший ученик:\n" + shkolniks.getFirst());
+//        students.sort(new assessmentsComparator());//2 заданиеl
+//        System.out.println("Лучший студент:\n" + students.getFirst());
+//        shkolniks.sort(new numberSchoolComparator());//3 задание
+        System.out.println("Сортировка школьников по номеру школы\n" + shkolniks.toString());
+//        shkolniks.sort(new assessmentsComparator());//3 задание
+//        System.out.println("Сортировка школьников по успеваемости\n" + shkolniks.toString());//4 задание
+//        System.out.println("Сортировка студентов по успеваемости\n" + students.toString());//4 задание
+        //генератор
 //        for (int i = 0; i < 2; i++) {
 //            students.add(creatStudentLab(i));
 //        }
 //        for (int i = 0; i < 2; i++) {
 //            shkolniks.add(creatShkolnikLab(i));
 //        }
-        while (true) {//ручной ввод
-            System.out.println("Введите кого хотите создать?\nШкольник\nСтудент");
-            String result = scanner.next();
-            if (result.equalsIgnoreCase("Школьник")) shkolniks.add(creatShkolnik(scanner));
-            if (result.equalsIgnoreCase("Студент")) students.add(creatStudent(scanner));
-            if (result.equalsIgnoreCase("выход")) break;
-        }
+//        while (true) {//ручной ввод
+//            System.out.println("Введите кого хотите создать?\nШкольник\nСтудент");
+//            String result = scanner.next();
+//            if (result.equalsIgnoreCase("Школьник")) shkolniks.add(creatShkolnik(scanner));
+//            if (result.equalsIgnoreCase("Студент")) students.add(creatStudent(scanner));
+//            if (result.equalsIgnoreCase("выход")) break;
+//        }
         scanner.close();
-        System.out.println(students.toString());
+//        System.out.println(students.toString());
 //        Shkolnik.printGirlsWithFirstPlace(shkolniks);
 //        Student.printStudentsWithCourseworkGrades(students);
 //        Uchenik.printSpecialScholarshipRecipients(shkolniks, students);
     }
-
 
     public static Student creatStudentLab(int count) {
         Random random = new Random();
@@ -191,6 +248,21 @@ public class Lab5_ {
                 System.err.println("Введите число");
             }
         }
+        valid = false;
+        //школа
+        while (!valid) {
+            try {
+                System.out.println("Введите номер школы:");
+                shkolnik.setNumberSchool(scanner.nextInt());
+                valid = true;
+            } catch (IllegalArgumentException e) {
+                scanner.nextLine();
+                System.err.println(e.getMessage());
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                System.err.println("Введите число");
+            }
+        }
         System.out.println("Введите гендр:");
         shkolnik.setGender(scanner.next());
         valid = false;
@@ -260,7 +332,8 @@ public class Lab5_ {
         boolean participatedInRegionalOlympiad = (random.nextInt(0, 2) == 1);
         boolean firstPlaceAtSchoolOlympiad = (random.nextInt(0, 2) == 1);
         boolean prizeWinnerInCityOlympiad = (random.nextInt(0, 2) == 1);
-        return new Shkolnik("Shkolnik" + String.valueOf(count), " ", "-", random.nextInt(7, 19), assessmentsShkolnik, participatedInRegionalOlympiad
+        return new Shkolnik("Shkolnik" + String.valueOf(count), " ", "-", random.nextInt(7, 19),
+                random.nextInt(1, 1001), assessmentsShkolnik, participatedInRegionalOlympiad
                 , firstPlaceAtSchoolOlympiad, prizeWinnerInCityOlympiad);
     }
 }

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Uchenik {
+public class Uchenik implements Comparable<Uchenik> {
     protected String name;
     protected String surname;
     protected String gender;
     protected int age;
-    private HashMap<String, Integer> assessments;
+    protected HashMap<String, Integer> assessments;
+    protected double academicPerformance;
 
     public Uchenik() {
         this("Не задан", "Не задан", "-", 0);
@@ -34,6 +35,14 @@ public class Uchenik {
 
     public String getSurname() {
         return surname;
+    }
+
+    public double getAcademicPerformance() {
+        int sum = 0;
+        for (Integer assessment : this.assessments.values()) {
+            sum += assessment;
+        }
+        return (double) sum / this.assessments.size();
     }
 
     public void setName(String name) {
@@ -78,38 +87,18 @@ public class Uchenik {
         this.assessments.put(subjectName, score);
     }
 
-    public static void printSpecialScholarshipRecipients(ArrayList<Shkolnik> shkolniks, ArrayList<Student> students) {
-        ArrayList<Uchenik> result = new ArrayList<>();
-        for (Student student : students) {
-            int sum = 0;
-            for (Map.Entry<String, Integer> entry : student.getAssessments().entrySet()) {
-                sum += entry.getValue();
-            }
-            if ((double) sum / 4 < 4.75) continue;
-            sum = 0;
-            for (Map.Entry<String, Integer> entry : student.getTermPapers().entrySet()) {
-                sum += entry.getValue();
-            }
-            if ((double) sum / 3 != 5.00) continue;
-            result.add(student);
-        }
-        for (Shkolnik shkolnik : shkolniks) {
-            if (!(shkolnik.getAssessments().get("Математика") == 5 && shkolnik.getAssessments().get("Русский язык") == 5 &&
-                    shkolnik.getAssessments().get("История") == 5 && shkolnik.getAssessments().get("Английский язык") == 5 &&
-                    shkolnik.getAssessments().get("Биология") >= 4 && shkolnik.getAssessments().get("Физика") >= 4))
-                continue;
-            if (!(shkolnik.isParticipatedInRegionalOlympiad()
-                    || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())) continue;
-            result.add(shkolnik);
-        }
-        System.out.println(result.toString());
+    @Override
+    public int compareTo(Uchenik o) {
+        return this.getAge() - o.getAge();
     }
 
     @Override
     public String toString() {
-        return "Имя: " + this.name +
+        return "\nИмя: " + this.name +
+                "\nФамилия: " + this.surname +
                 "\nПол: " + this.gender +
                 "\nВозраст: " + this.age +
-                "\n" + assessments.toString();
+                "\n" + assessments.toString() +
+                "\nСр.оценка: " + getAcademicPerformance();
     }
 }

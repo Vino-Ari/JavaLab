@@ -11,6 +11,7 @@ public class Shkolnik extends Uchenik {
     private boolean prizeWinnerInCityOlympiad;          // Призёр городской олимпиады
     private ArrayList<String> subject = new ArrayList<>(List.of(new String[]{"математика", "русский язык",
             "история", "английский язык", "биология", "физика"}));
+    private int numerSchool;
 
     public Shkolnik() {
         super();
@@ -23,10 +24,11 @@ public class Shkolnik extends Uchenik {
         this.participatedInRegionalOlympiad = false;
         this.firstPlaceAtSchoolOlympiad = false;
         this.prizeWinnerInCityOlympiad = false;
+        this.numerSchool = 1;
     }
 
-    public Shkolnik(String name,String surname, String gender, int age) {
-        super(name,surname, gender, age);
+    public Shkolnik(String name, String surname, String gender, int age, int numerSchool) {
+        super(name, surname, gender, age);
         this.getAssessments().put("Математика", 2);
         this.getAssessments().put("Русский язык", 2);
         this.getAssessments().put("История", 2);
@@ -36,16 +38,28 @@ public class Shkolnik extends Uchenik {
         this.participatedInRegionalOlympiad = false;
         this.firstPlaceAtSchoolOlympiad = false;
         this.prizeWinnerInCityOlympiad = false;
+        this.numerSchool = numerSchool;
+
     }
 
-    public Shkolnik(String name,String surname, String gender, int age, HashMap<String, Integer> assessments
+    public Shkolnik(String name, String surname, String gender, int age, int numberSchool, HashMap<String, Integer> assessments
             , boolean participatedInRegionalOlympiad, boolean firstPlaceAtSchoolOlympiad
             , boolean prizeWinnerInCityOlympiad) {
-        super(name,surname, gender, age);
+        super(name, surname, gender, age);
         this.participatedInRegionalOlympiad = participatedInRegionalOlympiad;
         this.firstPlaceAtSchoolOlympiad = firstPlaceAtSchoolOlympiad;
         this.prizeWinnerInCityOlympiad = prizeWinnerInCityOlympiad;
         setAssessments(assessments);
+        this.numerSchool = numberSchool;
+    }
+
+    public void setNumberSchool(int numerSchool) {
+        if (numerSchool < 0) throw new IllegalArgumentException("Номер школы не может быть отрицательным");
+        this.numerSchool = numerSchool;
+    }
+
+    public int getNubmerSchool() {
+        return numerSchool;
     }
 
     public void setAssessments(HashMap<String, Integer> assessments) {
@@ -79,6 +93,20 @@ public class Shkolnik extends Uchenik {
     public boolean isPrizeWinnerInCityOlympiad() {
         return prizeWinnerInCityOlympiad;
     }
+    public static ArrayList<Shkolnik> SpecialScholarshipRecipients(ArrayList<Shkolnik> shkolniks) {
+        ArrayList<Shkolnik> result = new ArrayList<>();
+        for (Shkolnik shkolnik : shkolniks) {
+            if (!(shkolnik.getAssessments().get("Математика") == 5 && shkolnik.getAssessments().get("Русский язык") == 5 &&
+                    shkolnik.getAssessments().get("История") == 5 && shkolnik.getAssessments().get("Английский язык") == 5 &&
+                    shkolnik.getAssessments().get("Биология") >= 4 && shkolnik.getAssessments().get("Физика") >= 4))
+                continue;
+            if (!(shkolnik.isParticipatedInRegionalOlympiad()
+                    || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())) continue;
+            result.add(shkolnik);
+        }
+        return result;
+    }
+
     public static void printGirlsWithFirstPlace(ArrayList<Shkolnik> shkolniks) {
         shkolniks.removeIf(shkolnik -> (shkolnik.getGender().equals("m") || !(shkolnik.isParticipatedInRegionalOlympiad()
                 || shkolnik.isFirstPlaceAtSchoolOlympiad() || shkolnik.isPrizeWinnerInCityOlympiad())));
@@ -87,9 +115,10 @@ public class Shkolnik extends Uchenik {
 
     @Override
     public String toString() {
-        return "[Школьник] "+super.toString() +
+        return "\n[Школьник] " + super.toString() +
+                "\nНомер школы: " + numerSchool +
                 "\nУчаствовал в областной олимпиаде: " + participatedInRegionalOlympiad +
-                "\n Имеются первые места в школьной олимпиаде: " + firstPlaceAtSchoolOlympiad +
-                "\n Является призёром городской олимпиады: " + prizeWinnerInCityOlympiad+"\n";
+                "\nИмеются первые места в школьной олимпиаде: " + firstPlaceAtSchoolOlympiad +
+                "\nЯвляется призёром городской олимпиады: " + prizeWinnerInCityOlympiad + "\n";
     }
 }

@@ -83,9 +83,25 @@ public class Student extends Uchenik {
 
         }
     }
-
+    public static ArrayList<Student> SpecialScholarshipRecipients(ArrayList<Student> students) {
+        ArrayList<Student> result = new ArrayList<>();
+        for (Student student : students) {
+            int sum = 0;
+            for (Map.Entry<String, Integer> entry : student.getAssessments().entrySet()) {
+                sum += entry.getValue();
+            }
+            if ((double) sum / 4 < 4.75) continue;
+            sum = 0;
+            for (Map.Entry<String, Integer> entry : student.getTermPapers().entrySet()) {
+                sum += entry.getValue();
+            }
+            if ((double) sum / 3 != 5.00) continue;
+            result.add(student);
+        }
+        return result;
+    }
     @Override
     public String toString() {
-        return "[Школьник] " + super.toString() + "\n" + this.termPapers.toString() + "\n";
+        return "\n[Студент] " + super.toString() + "\n" + this.termPapers.toString() + "\n";
     }
 }

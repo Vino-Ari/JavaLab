@@ -14,7 +14,7 @@ public class Lab9_2 {
                 words, the total number of sentences and many others""";
         String[] words = text.split("[\\s,.?!]+");
         System.out.println(Arrays.toString(words));
-        long count=Arrays.stream(words).filter(word->word.matches(".*es")).count();
+        long count = Arrays.stream(words).filter(word -> word.matches(".*es")).count();
         System.out.println(count);
         Arrays.sort(words, (word1, word2) -> Integer.compare(word1.length(), word2.length()));
         System.out.println(Arrays.toString(words));
