@@ -18,6 +18,8 @@ public abstract class ExpenseManager {
                 String[] s = line.split("\\s+");
                 plan.put(s[0], Double.valueOf(s[1]));
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("В строке не хватает данных");
         }
         if (plan.size() > 5) throw new IllegalArgumentException("Слишком много данных в файле");
         if (plan.size() < 5) throw new IllegalArgumentException("Недостаточно данных в файле");
@@ -35,6 +37,8 @@ public abstract class ExpenseManager {
                     expenses.add(new Expenses(data));
                 } catch (IllegalArgumentException e) {
                     System.err.println("Ошибка при чтении строки");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println("В строке не хватает данных");
                 } catch (Exception e) {
                     System.err.println(e.getMessage());
                 }
@@ -57,7 +61,7 @@ public abstract class ExpenseManager {
     private static String sortCost(ArrayList<Expenses> expenses, String expenseType) {
         List<String> sortedProducts = expenses.stream()
                 .filter(e -> e.getExpenseType().equals(expenseType))
-                .sorted(Comparator.comparingDouble(Expenses::getCost))
+                .sorted(Comparator.comparingDouble(Expenses::getCost).reversed())
                 .map(Expenses::getProductOrService).toList();
 
         return String.join(", ", sortedProducts);
