@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Car> cars = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader())) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(""))) {
             while (reader.readLine() != null) {
                 ArrayList<String> data = new ArrayList<>();
                 for (int i = 0; i < 9; i++) {
@@ -24,6 +24,8 @@ public class Main {
                     cars.add(new Car(data));
                 } catch (IllegalArgumentException e) {
                     System.err.println("Ошибка при создании автомобиля: " + e.getMessage());
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
                 }
             }
         } catch (IOException e) {
@@ -34,8 +36,8 @@ public class Main {
             return;
         }
         Car.printstatistic(cars);
-//        String path = "C:\\Users\\ivann\\IdeaProjects\\JavaLab\\src\\IZ2\\result.txt";
-//        Car.writtestatistic(cars, path);
+        String path = "";
+        Car.writtestatistic(cars, path);
 
     }
 }

@@ -2,7 +2,7 @@
 6300
 toyota
 cruiser
-2008
+2008d
 clean vehicle
 274117.0
 black

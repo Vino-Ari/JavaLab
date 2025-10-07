@@ -14,16 +14,6 @@ public class Car {
     private double mileageInMiles; // Количество миль, пройденных автомобилем 7
     private String color;  // Цвет автомобиля 8
 
-
-    public Car(double price, int yearOfManufacture, String condition,
-               double mileageInMiles, String color) {
-        setPrice(price);
-        setYearOfManufacture(yearOfManufacture);
-        this.condition = condition;
-        setMileageInMiles(mileageInMiles);
-        this.color = color;
-    }
-
     public Car(ArrayList<String> data) {
         setPrice(Double.parseDouble(data.getFirst()));
         setYearOfManufacture(Integer.parseInt(data.get(1)));
