@@ -8,7 +8,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class ExpenseManager {
+public class ExpenseManager {
+    private ExpenseManager() {
+    }
     public static HashMap<String, Double> readPlan(String path) throws IOException,
             NumberFormatException {
         HashMap<String, Double> plan = new HashMap<>();
